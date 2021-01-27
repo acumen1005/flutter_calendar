@@ -32,11 +32,23 @@ class DateHelper {
     return date;
   }
 
+  /// 上周
+  static DateTime previousWeek(DateTime dateTime) {
+    final previousDate = dateTime.subtract(Duration(days: 7));
+    return previousDate;
+  }
+
+  /// 上周
+  static DateTime nextWeek(DateTime dateTime) {
+    final nextDate = dateTime.add(Duration(days: 7));
+    return nextDate;
+  }
+
   /// 上一个月
   static DateTime previousMonth(DateTime dateTime) {
     final date = dateTimeOfFirstDayInMonth(dateTime);
     final previousDate = date.subtract(Duration(days: 1));
-    if (previousDate.month == now().month) {
+    if (previousDate.month == now().month && previousDate.year == now().year) {
       return now();
     }
     return dateTimeOfFirstDayInMonth(previousDate);
@@ -47,13 +59,13 @@ class DateHelper {
     final date = dateTimeOfFirstDayInMonth(dateTime);
     final daysCount = daysCountOfMonth(dateTime);
     final nextDate = date.add(Duration(days: daysCount));
-    if (nextDate.month == now().month) {
+    print(nextDate);
+    if (nextDate.month == now().month && nextDate.year == now().year) {
       return now();
     }
     return dateTimeOfFirstDayInMonth(nextDate);
   }
 
-/// 下一个月
   static DateTime dateTimeOfFirstDayInMonth(DateTime dateTime) {
     final year = dateTime.year;
     final month = dateTime.month;
